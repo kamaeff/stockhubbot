@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    image: stockhub/site
+    ports:
+      - '8888:80'
+
+  bot:
+    image: kamaeff/stockhub:v3
+    environment:
+      BOT_TOKEN: 6479825152:AAGSUcS0m1idMrJ-LqTn9lABI62LfbpsaaI

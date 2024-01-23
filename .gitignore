@@ -1,0 +1,9 @@
+/src/logs/
+/src/app/Config/
+*.csv
+.idea
+/src/payment/
+/node_modules/
+/src/app/func/admin.js
+*.env
+todo.txt
