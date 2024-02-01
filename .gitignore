@@ -3,6 +3,7 @@
 *.csv
 .idea
 /src/payment/
+/src/admin-page/
 /node_modules/
 /src/app/func/admin.js
 *.env

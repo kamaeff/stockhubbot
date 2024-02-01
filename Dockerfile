@@ -1,7 +1,4 @@
-FROM node:14
-
-MAINTAINER Kamaev Anton <kamaeff2@gmail.com>
-ENV TZ=Europe/Moscow
+FROM node:21
 
 WORKDIR /tg-bot-js-yokross.v3
 COPY package*.json ./
