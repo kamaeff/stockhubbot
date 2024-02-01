@@ -1,4 +1,3 @@
-const { admin_btns } = require('./btns')
 const { send_photo, add_user, getProfile } = require('../DB/db')
 
 async function start(bot, chatId, username) {
@@ -81,11 +80,6 @@ async function profile_push(bot, chatId, userStorage, username) {
 		}
 
 		const chat_id = chatId.toString()
-		const chat =
-			chat_id === process.env.GROUP_ADMIN ||
-			chat_id === process.env.ADMIN_ID ||
-			chat_id === process.env.LOGIST ||
-			chat_id === process.env.SERVIRCE_ID
 
 		await bot.sendPhoto(chatId, './src/app/img/Logo.png', {
 			caption:
@@ -139,12 +133,6 @@ async function profile_push(bot, chatId, userStorage, username) {
 					],
 					[
 						{
-							text: chat ? '📑 Админка' : '',
-							callback_data: 'admin',
-						},
-					],
-					[
-						{
 							text: '🏠 Главное меню',
 							callback_data: 'exit',
 						},
@@ -168,11 +156,6 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 		}
 
 		const chat_id = chatId.toString()
-		const chat =
-			chat_id === process.env.GROUP_ADMIN ||
-			chat_id === process.env.ADMIN_ID ||
-			chat_id === process.env.LOGIST ||
-			chat_id === process.env.SERVIRCE_ID
 
 		await bot.editMessageCaption(
 			`📈 <b>Вот твоя стата ${username}:</b>\n\n` +
@@ -230,12 +213,6 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 						],
 						[
 							{
-								text: chat ? '📑 Админка' : '',
-								callback_data: 'admin',
-							},
-						],
-						[
-							{
 								text: '🏠 Главное меню',
 								callback_data: 'exit',
 							},
@@ -245,18 +222,6 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 			}
 		)
 	}
-}
-
-async function start_admin(bot, chatId) {
-	await bot.sendMessage(
-		chatId,
-		`<b><i>✌🏻 Yo AdminPanel</i></b>\n\n` +
-			`<i><b>Created by: </b>Anton Kamaev\n@yokross_bot Alfa-version(v3)</i>`,
-		{
-			parse_mode: 'HTML',
-			reply_markup: JSON.stringify(admin_btns),
-		}
-	)
 }
 
 async function tech(bot, chatId, username) {
@@ -271,59 +236,9 @@ async function tech(bot, chatId, username) {
 	})
 }
 
-async function check_folow(YokrossId, chatId, bot, username, messageid) {
-	console.log(YokrossId, chatId, username)
-	try {
-		const chatMember = await bot.getChatMember(YokrossId, chatId)
-		console.log(chatMember)
-		await add_user(chatId, username)
-		const check_data =
-			chatMember &&
-			(chatMember.status === 'member' ||
-				chatMember.status === 'creator' ||
-				chatMember.status === 'administrator')
-
-		if (check_data) {
-			return true
-		} else {
-			await bot.deleteMessage(chatId, messageid)
-			await bot.sendPhoto(chatId, await send_photo('logo'), {
-				caption:
-					`✌🏼 Yo <i><b>${username}</b></i>, я помогу подобрать тебе кроссовки, чтобы воспользоваться моими функциями, подпишись на нашу группу <b><i><a href='https://t.me/stockhub12'>StockHub</a></i></b> !` +
-					`\n\nТак же обязательно прочитай <b><i><a href='https://telegra.ph/Dogovor-oferty-na-okazanie-uslugi-11-27'>Договор оферты</a></i></b> !\n\n` +
-					`После выполнения всех требований --> <i><b>Я прочитал и подписался</b></i>\n\n`,
-				parse_mode: 'HTML',
-				reply_markup: JSON.stringify({
-					inline_keyboard: [
-						[{ text: '🌐 StockHub', url: 'https://t.me/stockhub12' }],
-						[
-							{
-								text: '📑 Договор оферты',
-								url: 'https://telegra.ph/Dogovor-oferty-na-okazanie-uslugi-11-27',
-							},
-						],
-						[
-							{
-								text: '✅ Я прочитал и подписался',
-								callback_data: 'end',
-							},
-						],
-					],
-				}),
-			})
-			return false
-		}
-	} catch (error) {
-		console.error('Error in check_folow:', error)
-		return false
-	}
-}
-
 module.exports = {
 	start,
 	tech,
-	start_admin,
-	check_folow,
 	start_update,
 	profile,
 	profile_push,
