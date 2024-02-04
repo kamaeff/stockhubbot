@@ -1,3 +1,4 @@
+const { admin_btns } = require('./btns')
 const { send_photo, add_user, getProfile } = require('../DB/db')
 
 async function start(bot, chatId, username) {
@@ -14,7 +15,7 @@ async function start(bot, chatId, username) {
 			`<i><b><a href="https://telegra.ph/Dogovor-oferty-na-okazanie-uslugi-11-27">➖ Договор оферты</a></b></i>\n` +
 			`<i><b><a href="https://telegra.ph/Instrukciya-po-ispolzovaniyu-StockHubBot-12-13">➖ Инструкция использования</a></b></i>\n` +
 			`➖ /commands <i>(Дополнительные команды)</i>\n\n` +
-			`<i><b>Created by: </b><b><a href="https://t.me/kamaev_log">Anton Kamaev</a></b>.\n<b>Alfa-version.v3</b></i>`,
+			`<i><b>Created by: </b><b><a href="https://t.me/YoKrossbot_log">Anton Kamaev</a></b>.\n<b>Alfa-version.v3</b></i>`,
 		parse_mode: 'HTML',
 		reply_markup: JSON.stringify({
 			inline_keyboard: [
@@ -45,7 +46,7 @@ async function start_update(bot, chatId, username, messageid) {
 				`<i><b><a href="https://telegra.ph/Dogovor-oferty-na-okazanie-uslugi-11-27">➖ Договор оферты</a></b></i>\n` +
 				`<i><b><a href="https://telegra.ph/Instrukciya-po-ispolzovaniyu-StockHubBot-12-13">➖ Инструкция использования</a></b></i>\n` +
 				`➖ /commands <i>(Дополнительные команды)</i>\n\n` +
-				`<i><b>Created by: </b><b><a href="https://t.me/kamaev_log">Anton Kamaev</a></b>.\n<b>Beta-version(stable).v1</b></i>`,
+				`<i><b>Created by: </b><b><a href="https://t.me/YoKrossbot_log">Anton Kamaev</a></b>.\n<b>Beta-version(stable).v1</b></i>`,
 			parse_mode: 'HTML',
 		},
 
@@ -80,6 +81,11 @@ async function profile_push(bot, chatId, userStorage, username) {
 		}
 
 		const chat_id = chatId.toString()
+		const chat =
+			chat_id === process.env.GROUP_ADMIN ||
+			chat_id === process.env.ADMIN_ID ||
+			chat_id === process.env.LOGIST ||
+			chat_id === process.env.SERVIRCE_ID
 
 		await bot.sendPhoto(chatId, './src/app/img/Logo.png', {
 			caption:
@@ -133,6 +139,12 @@ async function profile_push(bot, chatId, userStorage, username) {
 					],
 					[
 						{
+							text: chat ? '📑 Админка' : '',
+							callback_data: 'admin',
+						},
+					],
+					[
+						{
 							text: '🏠 Главное меню',
 							callback_data: 'exit',
 						},
@@ -156,6 +168,11 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 		}
 
 		const chat_id = chatId.toString()
+		const chat =
+			chat_id === process.env.GROUP_ADMIN ||
+			chat_id === process.env.ADMIN_ID ||
+			chat_id === process.env.LOGIST ||
+			chat_id === process.env.SERVIRCE_ID
 
 		await bot.editMessageCaption(
 			`📈 <b>Вот твоя стата ${username}:</b>\n\n` +
@@ -213,6 +230,12 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 						],
 						[
 							{
+								text: chat ? '📑 Админка' : '',
+								callback_data: 'admin',
+							},
+						],
+						[
+							{
 								text: '🏠 Главное меню',
 								callback_data: 'exit',
 							},
@@ -224,11 +247,23 @@ async function profile(bot, chatId, userStorage, username, messageid) {
 	}
 }
 
+async function start_admin(bot, chatId) {
+	await bot.sendMessage(
+		chatId,
+		`<b><i>✌🏻 Yo AdminPanel</i></b>\n\n` +
+			`<i><b>Created by: </b>Anton Kamaev\n@yokross_bot Alfa-version(v3)</i>`,
+		{
+			parse_mode: 'HTML',
+			reply_markup: JSON.stringify(admin_btns),
+		}
+	)
+}
+
 async function tech(bot, chatId, username) {
 	await bot.sendPhoto(chatId, await send_photo('tech'), {
 		caption:
 			`❗️ <b>${username}</b>, данный раздел сейчас в разработке ❗️\n\n` +
-			`🥺 Кому интересно, буду делиться своими мыслями и апдейтами вот тут ---> <b><a href="https://t.me/kamaev_log">YoKrossBot.log.</a></b>`,
+			`🥺 Кому интересно, буду делиться своими мыслями и апдейтами вот тут ---> <b><a href="https://t.me/YoKrossbot_log">YoKrossBot.log.</a></b>`,
 		parse_mode: 'HTML',
 		reply_markup: JSON.stringify({
 			inline_keyboard: [[{ text: '🏠 Главное меню', callback_data: 'exit' }]],
@@ -239,6 +274,7 @@ async function tech(bot, chatId, username) {
 module.exports = {
 	start,
 	tech,
+	start_admin,
 	start_update,
 	profile,
 	profile_push,

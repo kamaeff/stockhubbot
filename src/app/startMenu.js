@@ -498,6 +498,7 @@ module.exports = bot => {
 				break
 
 			case 'end':
+				bot.deleteMessage(chatId, messageId - 1)
 				bot.deleteMessage(chatId, messageId)
 				await start(bot, chatId, msg.message.chat.first_name)
 
@@ -528,7 +529,11 @@ module.exports = bot => {
 						`✌🏼 Yo <i><b>${msg.message.chat.first_name}</b></i>, идет обновление каталога пар, извини за недоразумение. Скоро пофиксим!`,
 						{
 							parse_mode: 'HTML',
-							reply_markup: JSON.stringify(keyboard),
+							reply_markup: JSON.stringify({
+								inline_keyboard: [
+									[{ text: '🏠 Главное меню', callback_data: 'end' }],
+								],
+							}),
 						}
 					)
 				} else {
