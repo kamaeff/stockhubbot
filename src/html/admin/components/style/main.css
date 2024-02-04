@@ -1,0 +1,205 @@
+.main {
+	display: grid;
+}
+
+.main__users,
+.main__logist,
+.main__create {
+	display: flex;
+	flex-direction: column;
+}
+
+.table-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.main__logist_table,
+.main__users_table,
+.main__create_table,
+.pagination-container {
+	margin: auto;
+	width: 80%;
+	overflow-x: auto;
+	caption-side: top;
+}
+
+.pagination-container {
+	width: 5%;
+
+	text-align: center;
+	margin-top: 5px;
+	border: 1px solid #d8d8d8;
+	background-color: #d8d8d8;
+	border-radius: 9px;
+}
+
+.pagination-container a {
+	margin: 0 5px;
+	color: #000;
+}
+
+.pagination-container a:hover {
+	transform: scale(1.1);
+	color: #b9b9b9;
+}
+
+.main__table--title {
+	font-size: 30px;
+	color: #000;
+}
+
+table {
+	align-items: center;
+}
+
+table thead th {
+	font-weight: bold;
+	text-align: center;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+}
+
+table thead tr th:first-child {
+	border-radius: 8px 0 0 8px;
+}
+
+table thead tr th:last-child {
+	border-radius: 0 8px 8px 0;
+}
+
+table tbody td {
+	text-align: center;
+	border: none;
+	padding: 8px 5px;
+	font-size: 14px;
+	vertical-align: top;
+}
+
+table tbody tr:nth-child(even) {
+	background: #f3f3f3;
+}
+
+table tbody tr td:first-child {
+	border-radius: 8px 0 0 8px;
+}
+
+table tbody tr td:last-child {
+	border-radius: 0 8px 8px 0;
+}
+
+.main__logist_table--input {
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.main__logist_table--input:hover,
+.main__logist_table--input:focus {
+	cursor: pointer;
+	transform: scale(1.05);
+}
+
+.main__logist_table-btn--edit,
+.main__logist_table-btn--del {
+	background-color: #888888;
+	color: white;
+	padding: 2px 10px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.main__logist_table--refresh {
+	background: none !important;
+	color: white;
+	border: none !important;
+	cursor: pointer;
+}
+
+.main__logist_table--refresh:hover {
+	animation: rotateAnimation 1s ease-in-out forwards;
+}
+
+@keyframes rotateAnimation {
+	0% {
+		transform: rotate(0deg);
+	}
+	75% {
+		transform: rotate(360deg);
+	}
+	100% {
+		transform: rotate(0deg);
+		transform: scale(1.2);
+	}
+}
+
+.circle-container {
+	vertical-align: middle;
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+}
+
+.circle {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.order__status-succes,
+.main__logist_table-btn--edit:hover {
+	background: #c0ff9c;
+	color: #000;
+}
+
+.order__status-error,
+.main__logist_table-btn--del:hover {
+	background: #ff7d88;
+}
+
+.order__status-assembly {
+	background: #ffd621;
+}
+
+.main__create_table input,
+.main__create_table select {
+	cursor: pointer;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	outline: none;
+
+	padding: 3px 0px;
+}
+
+.main__moder {
+	max-width: 1400px;
+
+	display: grid;
+	justify-content: center;
+
+	margin: 30px auto;
+	gap: 30px;
+}
+
+.main__moder_con--title {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+.main__moder_con--text {
+	max-width: 800px;
+	text-align: justify;
+	margin: 0 auto;
+}
+
+.block {
+	display: block;
+}

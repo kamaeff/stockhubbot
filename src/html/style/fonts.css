@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'AcromRegular';
+	src: url('../assets/fonts/Acrom-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'AcromBold';
+	src: url('../assets/fonts/Acrom-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'AcromMedium';
+	src: url('../assets/fonts/Acrom-Medium.woff') format('woff');
+}
