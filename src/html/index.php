@@ -1,8 +1,9 @@
 <?php
 function connect()
 {
-	//$env_file_path = realpath("D:\OSPanel\domains\stock-site\.env");
-	$env_file_path = realpath("/var/www/html/.env");
+	// $env_file_path = realpath("D:\OSPanel\domains\stock-site\.env");
+	// $env_file_path = realpath("/var/www/html/.env");
+	$env_file_path = realpath("/home/kamaeff/Documents/Work/stockhub/src/html/.env");
 	$var_arrs = parseEnvFile($env_file_path);
 
 	$server = $var_arrs['HOST'];
@@ -119,7 +120,7 @@ function executeQuery($query)
 					$resultCount = executeQuery("SELECT COUNT(*) as usersCount FROM users");
 					$rowCount = $resultCount->fetch_assoc();
 					echo '<span>' . $rowCount['usersCount'] . '</span>'
-					?>
+						?>
 
 				</p>
 
@@ -129,7 +130,7 @@ function executeQuery($query)
 					$resultCount = executeQuery("SELECT COUNT(*) as ordersCount FROM orders");
 					$rowCount = $resultCount->fetch_assoc();
 					echo '<span>' . $rowCount['ordersCount'] . '</span>'
-					?>
+						?>
 
 				</p>
 

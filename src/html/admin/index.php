@@ -62,6 +62,7 @@ include_once("./components/php/connect.php");
 							<th>Наличие</th>
 							<th>Пол</th>
 							<th>Стиль</th>
+							<th></th>
 						</thead>
 						<tbody>
 

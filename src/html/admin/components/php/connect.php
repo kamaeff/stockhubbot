@@ -2,7 +2,8 @@
 function connect()
 {
 	//$env_file_path = realpath("D:\OSPanel\domains\stockhub-admin\.env");
-	$env_file_path = realpath("/var/www/html/admin/.env");
+	$env_file_path = realpath("/home/kamaeff/Documents/Work/stockhub/.env");
+	// $env_file_path = realpath("/var/www/html/");
 	$var_arrs = parseEnvFile($env_file_path);
 
 	$server = $var_arrs['HOST'];
