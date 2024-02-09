@@ -150,8 +150,6 @@ module.exports = bot => {
 
 		switch (data) {
 			case 'locale':
-				// bot.deleteMessage(chatId, messageId);
-
 				bot.editMessageCaption(
 					`✌🏼 Yo ${msg.message.chat.first_name}, отправь мне пожалуйста адрес, который ближе к тебе или адресс ПВЗ Boxberry.\n\n` +
 						`<i>P.S Если не знаешь где находятся <i><b>ПВЗ Boxberry</b></i>, то можешь посмотреть на карте</i>\n\n` +
@@ -181,9 +179,6 @@ module.exports = bot => {
 				break
 
 			case 'email':
-				// bot.deleteMessage(chatId, messageId);
-				console.log(messageId)
-
 				bot.editMessageCaption(
 					`✌🏼 Yo <b>${msg.message.chat.first_name}</b>, напиши мне свою рабочую почту (это надо для отправки чека после покупки)`,
 					{
@@ -207,8 +202,6 @@ module.exports = bot => {
 				break
 
 			case 'fio':
-				// bot.deleteMessage(chatId, messageId);
-
 				bot.editMessageCaption(
 					`✌🏼 Yo <b>${msg.message.chat.first_name}</b>, напиши мне свой ФИО (это надо для заполнения получателя при доставке)`,
 					{
@@ -232,7 +225,6 @@ module.exports = bot => {
 				break
 
 			case 'cancel':
-				// bot.deleteMessage(chatId, messageId);
 				await profile(
 					bot,
 					chatId,
@@ -262,8 +254,6 @@ module.exports = bot => {
 				break
 
 			case 'lifestyle':
-				// bot.deleteMessage(chatId, messageId);
-
 				await add_style(chatId, 'lifestyle')
 				await gender_choose(bot, msg, chatId, messageId)
 
@@ -271,8 +261,6 @@ module.exports = bot => {
 				break
 
 			case 'basket':
-				// bot.deleteMessage(chatId, messageId);
-
 				await add_style(chatId, 'basket')
 				await gender_choose(bot, msg, chatId, messageId)
 
@@ -280,8 +268,6 @@ module.exports = bot => {
 				break
 
 			case 'football':
-				// bot.deleteMessage(chatId, messageId);
-
 				await add_style(chatId, 'football')
 				await gender_choose(bot, msg, chatId, messageId)
 
@@ -289,8 +275,6 @@ module.exports = bot => {
 				break
 
 			case 'man':
-				// bot.deleteMessage(chatId, messageId);
-
 				await add_gender(chatId, 'man')
 				const model_m = await check_style(chatId)
 				await bot.editMessageMedia(
@@ -344,7 +328,6 @@ module.exports = bot => {
 			case 'Adidas':
 				logger.info(`${msg.message.chat.first_name} choose Adidas`)
 
-				// bot.deleteMessage(chatId, messageId);
 				await bot.editMessageMedia(
 					{
 						type: 'photo',
@@ -364,7 +347,6 @@ module.exports = bot => {
 			case 'Reebok':
 				logger.info(`${msg.message.chat.first_name} choose Reebok`)
 
-				// bot.deleteMessage(chatId, messageId);
 				await bot.editMessageMedia(
 					{
 						type: 'photo',
@@ -402,7 +384,6 @@ module.exports = bot => {
 			case 'Jordan':
 				logger.info(`${msg.message.chat.first_name} choose Jordan`)
 
-				// bot.deleteMessage(chatId, messageId);
 				await bot.editMessageMedia(
 					{
 						type: 'photo',
@@ -568,10 +549,9 @@ module.exports = bot => {
 					userStorage[chatId].photo[userStorage[chatId].currentIndex]
 
 				const profileData = await getProfile(chatId)
-				console.log(profileData)
 				if (profileData.length > 0) {
 					const profile = profileData[0]
-					userSession = {
+					userSession[chatId] = {
 						order_id: chatId + Date.now(),
 						name: selectedPhoto.name,
 						size: selectedPhoto.size,

@@ -46,7 +46,7 @@ include_once("./components/php/connect.php");
 		</header>
 
 		<main class="main">
-			<section class="main__create">
+			<section class="main__create" >
 				<form method="post" action="./components/php/data_add.php">
 					<table class="main__create_table">
 						<caption class="main__table--title">Добавить пару в таблицу кроссовок</caption>
