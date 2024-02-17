@@ -21,7 +21,7 @@ async function start(bot, chatId, username) {
       inline_keyboard: [
         [
           { text: "🔎 Поиск пары", callback_data: "choose" },
-          { text: "⚡️ ShowRoom", callback_data: "show" },
+          { text: "⚡️ ShowRoom", callback_data: "show_room" },
         ],
         [{ text: "📝 Поиск по артиклу", callback_data: "articul" }],
         [{ text: "✌🏻 Мой профиль", callback_data: "profile" }],
@@ -58,13 +58,13 @@ async function start_update(bot, chatId, username, messageid) {
         inline_keyboard: [
           [
             { text: "🔎 Поиск пары", callback_data: "choose" },
-            { text: "⚡️ ShowRoom", callback_data: "show" },
+            { text: "⚡️ ShowRoom", callback_data: "show_room" },
           ],
           [{ text: "📝 Поиск по артиклу", callback_data: "articul" }],
           [{ text: "✌🏻 Мой профиль", callback_data: "profile" }],
         ],
       }),
-    }
+    },
   );
 }
 
@@ -80,32 +80,22 @@ async function profile_push(bot, chatId, userStorage, username) {
       fio: profile.fio,
     };
 
-    const chat_id = chatId.toString();
-    const chat =
-      chat_id === process.env.GROUP_ADMIN ||
-      chat_id === process.env.ADMIN_ID ||
-      chat_id === process.env.LOGIST ||
-      chat_id === process.env.SERVIRCE_ID;
-
     await bot.sendPhoto(chatId, "./src/app/img/Logo.png", {
       caption:
         `📈 <b>Вот твоя стата ${username}:</b>\n\n` +
-        `● <b>ФИО:</b> <i>${
-          userStorage[chatId].fio.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].fio
+        `● <b>ФИО:</b> <i>${userStorage[chatId].fio.length === 0
+          ? ` 🚫 <i><b>Не заполнено!</b></i>`
+          : userStorage[chatId].fio
         }</i>\n` +
         `● <b>Всего заказов сделано:</b> <i>${userStorage[chatId].orders}</i>\n` +
         `● <b>Бонусы:</b> <i>${userStorage[chatId].bonuses}</i>\n` +
-        `● <b>Адрес доставки:</b> <i>${
-          userStorage[chatId].locale.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].locale
+        `● <b>Адрес доставки:</b> <i>${userStorage[chatId].locale.length === 0
+          ? ` 🚫 <i><b>Не заполнено!</b></i>`
+          : userStorage[chatId].locale
         }</i>\n` +
-        `● <b>Email:</b> <i>${
-          userStorage[chatId].email.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].email
+        `● <b>Email:</b> <i>${userStorage[chatId].email.length === 0
+          ? ` 🚫 <i><b>Не заполнено!</b></i>`
+          : userStorage[chatId].email
         }</i>\n\n` +
         `<i><b>P.S</b> Email, Адрес ПВЗ и ФИО нужны для формирования заказа</i>\n\n<i>Доставка по Москве возможна нашим курьром. Стоимость доставки в пределах МКАД составит 500 рублей, за пределами МКАД 800 рублей. Также возможна доставка в ПВЗ Боксберри.</i>`,
       parse_mode: "HTML",
@@ -139,12 +129,6 @@ async function profile_push(bot, chatId, userStorage, username) {
           ],
           [
             {
-              text: chat ? "📑 Админка" : "",
-              callback_data: "admin",
-            },
-          ],
-          [
-            {
               text: "🏠 Главное меню",
               callback_data: "exit",
             },
@@ -167,28 +151,23 @@ async function profile(bot, chatId, userStorage, username, messageid) {
       fio: profile.fio,
     };
 
-    const chat_id = chatId.toString();
-
     await bot.editMessageCaption(
       `📈 <b>Вот твоя стата ${username}:</b>\n\n` +
-        `● <b>ФИО:</b> <i>${
-          userStorage[chatId].fio.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].fio
-        }</i>\n` +
-        `● <b>Всего заказов сделано:</b> <i>${userStorage[chatId].orders}</i>\n` +
-        `● <b>Бонусы:</b> <i>${userStorage[chatId].bonuses}</i>\n` +
-        `● <b>Адрес доставки:</b> <i>${
-          userStorage[chatId].locale.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].locale
-        }</i>\n` +
-        `● <b>Email:</b> <i>${
-          userStorage[chatId].email.length === 0
-            ? ` 🚫 <i><b>Не заполнено!</b></i>`
-            : userStorage[chatId].email
-        }</i>\n\n` +
-        `<i><b>P.S</b> Email, Адрес ПВЗ и ФИО нужны для формирования заказа</i>\n\n<i>Доставка по Москве возможна нашим курьром. Стоимость доставки в пределах МКАД составит 500 рублей, за пределами МКАД 800 рублей. Также возможна доставка в ПВЗ Боксберри.</i>`,
+      `● <b>ФИО:</b> <i>${userStorage[chatId].fio.length === 0
+        ? ` 🚫 <i><b>Не заполнено!</b></i>`
+        : userStorage[chatId].fio
+      }</i>\n` +
+      `● <b>Всего заказов сделано:</b> <i>${userStorage[chatId].orders}</i>\n` +
+      `● <b>Бонусы:</b> <i>${userStorage[chatId].bonuses}</i>\n` +
+      `● <b>Адрес доставки:</b> <i>${userStorage[chatId].locale.length === 0
+        ? ` 🚫 <i><b>Не заполнено!</b></i>`
+        : userStorage[chatId].locale
+      }</i>\n` +
+      `● <b>Email:</b> <i>${userStorage[chatId].email.length === 0
+        ? ` 🚫 <i><b>Не заполнено!</b></i>`
+        : userStorage[chatId].email
+      }</i>\n\n` +
+      `<i><b>P.S</b> Email, Адрес ПВЗ и ФИО нужны для формирования заказа</i>\n\n<i>Доставка по Москве возможна нашим курьром. Стоимость доставки в пределах МКАД составит 500 рублей, за пределами МКАД 800 рублей. Также возможна доставка в ПВЗ Боксберри.</i>`,
       {
         chat_id: chatId,
         message_id: messageid,
@@ -231,7 +210,7 @@ async function profile(bot, chatId, userStorage, username, messageid) {
             ],
           ],
         }),
-      }
+      },
     );
   }
 }
@@ -240,11 +219,11 @@ async function start_admin(bot, chatId) {
   await bot.sendMessage(
     chatId,
     `<b><i>✌🏻 Yo AdminPanel</i></b>\n\n` +
-      `<i><b>Created by: </b>Anton Kamaev\n@yokross_bot Alfa-version(v3)</i>`,
+    `<i><b>Created by: </b>Anton Kamaev\n@yokross_bot Alfa-version(v3)</i>`,
     {
       parse_mode: "HTML",
       reply_markup: JSON.stringify(admin_btns),
-    }
+    },
   );
 }
 
